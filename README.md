@@ -1,1 +1,1 @@
-# じゃけぇさんのReact講座 TODOアプリをVanilla.jsで作成
+# じゃけぇさんのReact講座 TODOアプリをVanilla.jsで作成中！
