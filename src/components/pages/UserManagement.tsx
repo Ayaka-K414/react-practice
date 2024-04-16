@@ -10,15 +10,20 @@ import { memo, useCallback, useEffect } from 'react';
 import { UserCard } from '../organism/user/UserCard';
 import { useAllUsers } from '../../hooks/useAllUsers';
 import { UserDetailModal } from '../organism/user/UserDetailModal';
+import { useSelectUser } from '../../hooks/UseSelectUser';
 
 // eslint-disable-next-line
 export const UserManagement = memo(() => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { getUsers, loading, users } = useAllUsers();
+	const { onSelectUser, selectedUser } = useSelectUser();
+
+	console.log(selectedUser);
+
 	useEffect(() => getUsers(), []);
 
 	const onClickUser = useCallback((id: number) => {
-		console.log(id);
+		onSelectUser({ id, users });
 		onOpen();
 	}, []);
 

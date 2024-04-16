@@ -9,7 +9,7 @@ export const useSelectUser = () => {
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 	const onSelectUser = useCallback(({ id, users }: Props) => {
 		const targetUser = users.find((user) => user.id === id);
-		setSelectedUser(targetUser);
+		setSelectedUser(targetUser!);
 	}, []);
 	return { onSelectUser, selectedUser };
 };
