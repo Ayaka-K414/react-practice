@@ -6,22 +6,29 @@ import { UserManagement } from "../components/pages/UserManagement";
 import { Setting } from "../components/pages/Setting";
 import { Page404 } from "../components/pages/Page404";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
+import { LoginUserProvider } from '../providers/LoginUserProvider';
 
+// eslint-disable-next-line
 export const Router = memo(() => {
-  return (
-    <Routes>
-      {/* ログインページ */}
-      <Route path="/" element={<Login />} />
+	return (
+		<LoginUserProvider>
+			<Routes>
+				{/* ログインページ */}
+				<Route path="/" element={<Login />} />
 
-      {/* ログイン後のページ */}
-      <Route path="home" element={<HeaderLayout />}>
-        <Route index element={<Home />} />
-        <Route path="user_management" element={<UserManagement />} />
-        <Route path="setting" element={<Setting />} />
-      </Route>
+				{/* ログイン後のページ */}
+				<Route path="home" element={<HeaderLayout />}>
+					<Route index element={<Home />} />
+					<Route
+						path="user_management"
+						element={<UserManagement />}
+					/>
+					<Route path="setting" element={<Setting />} />
+				</Route>
 
-      {/* 404ページ */}
-      <Route path="*" element={<Page404 />} />
-    </Routes>
-  );
+				{/* 404ページ */}
+				<Route path="*" element={<Page404 />} />
+			</Routes>
+		</LoginUserProvider>
+	);
 });

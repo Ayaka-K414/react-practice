@@ -18,14 +18,14 @@ export const UserManagement = memo(() => {
 	const { getUsers, loading, users } = useAllUsers();
 	const { onSelectUser, selectedUser } = useSelectUser();
 
-	console.log(selectedUser);
-
 	useEffect(() => getUsers(), []);
 
-	const onClickUser = useCallback((id: number) => {
-		onSelectUser({ id, users });
-		onOpen();
-	}, []);
+	const onClickUser = useCallback(
+		(id: number) => {
+			onSelectUser({ id, users, onOpen });
+		},
+		[users, onSelectUser, onOpen]
+	);
 
 	return (
 		<>
@@ -48,7 +48,11 @@ export const UserManagement = memo(() => {
 					))}
 				</Wrap>
 			)}
-			<UserDetailModal isOpen={isOpen} onClose={onClose} />
+			<UserDetailModal
+				user={selectedUser}
+				isOpen={isOpen}
+				onClose={onClose}
+			/>
 		</>
 	);
 });
