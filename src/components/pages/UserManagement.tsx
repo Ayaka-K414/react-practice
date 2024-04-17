@@ -11,12 +11,14 @@ import { UserCard } from '../organism/user/UserCard';
 import { useAllUsers } from '../../hooks/useAllUsers';
 import { UserDetailModal } from '../organism/user/UserDetailModal';
 import { useSelectUser } from '../../hooks/UseSelectUser';
+import { useLoginUser } from '../../hooks/useLoginUser';
 
 // eslint-disable-next-line
 export const UserManagement = memo(() => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { getUsers, loading, users } = useAllUsers();
 	const { onSelectUser, selectedUser } = useSelectUser();
+	const {loginUser} = useLoginUser();
 
 	useEffect(() => getUsers(), []);
 
@@ -49,6 +51,7 @@ export const UserManagement = memo(() => {
 				</Wrap>
 			)}
 			<UserDetailModal
+				isAdmin={loginUser?.isAdmin}
 				user={selectedUser}
 				isOpen={isOpen}
 				onClose={onClose}
